@@ -39,6 +39,7 @@ export const schema = gql`
   }
 
   type Mutation {
+    createCheckout: String
     addToCheckout(checkoutItem: CheckoutInput): Checkout!
   }
 `

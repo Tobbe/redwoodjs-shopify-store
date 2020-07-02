@@ -25,6 +25,12 @@ export const getProduct = async ({ handle }) => {
   return { ...product, price: product.variants[0].priceV2 }
 }
 
+export const createCheckout = async () => {
+  const checkout = await shopifyClient.checkout.create();
+
+  return checkout.id;
+}
+
 export const addToCheckout = ({ id, item }) => {
   return {
     items: [item],
