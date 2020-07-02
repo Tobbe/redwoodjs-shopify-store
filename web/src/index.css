@@ -1,0 +1,47 @@
+html,
+body,
+header,
+header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Trebuchet MS';
+}
+
+h1 {
+  font-family: 'Arial Black';
+}
+
+header {
+  background-color: #eee;
+}
+
+header h1 {
+  text-align: center;
+  padding: 0 0.4em;
+}
+
+header a {
+  text-decoration: none;
+  color: black;
+}
+
+nav {
+  background-color: #e0e0e0;
+  padding: 0.4em 0;
+  margin-top: 0.4em;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  text-align: right;
+}
+
+main {
+  padding: 0.6em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
