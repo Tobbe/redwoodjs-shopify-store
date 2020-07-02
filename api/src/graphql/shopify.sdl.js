@@ -4,23 +4,16 @@ export const schema = gql`
     currencyCode: String!
   }
 
-  type MoneyRange {
-    min: Money!
-    max: Money!
-  }
-
   type Image {
     altText: String
     src: String
   }
 
   type Product {
-    id: String!
     handle: String!
-    availableForSale: Boolean!
     description: String!
     title: String!
-    price: MoneyRange!
+    price: Money!
     images: [Image]!
   }
 
@@ -42,7 +35,7 @@ export const schema = gql`
 
   type Query {
     getProducts: [Product]!
-    getProduct(id: String!): Product
+    getProduct(handle: String!): Product
   }
 
   type Mutation {
