@@ -5,7 +5,7 @@ const StoreLayout = ({ children }) => {
     <>
       <header>
         <h1>
-          <Link to={routes.home()}>Redwood Store</Link>
+          <Link to={routes.home()}>RedwoodJS Shopify Store</Link>
         </h1>
         <nav>
           <ul>

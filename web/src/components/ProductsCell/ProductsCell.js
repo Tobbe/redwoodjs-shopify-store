@@ -15,9 +15,9 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Fetching swag...</div>
+export const Loading = () => <div>Fetching products...</div>
 
-export const Empty = () => <div>No swag found 😞</div>
+export const Empty = () => <div>No products found 😞</div>
 
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 

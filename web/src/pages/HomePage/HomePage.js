@@ -4,7 +4,7 @@ import ProductsCell from 'src/components/ProductsCell'
 const HomePage = () => {
   return (
     <StoreLayout>
-      <p>Get some swag!</p>
+      <p>RedwoodJS as an e-commerce storefront</p>
       <div style={{ display: 'flex' }}>
         <ProductsCell />
       </div>
