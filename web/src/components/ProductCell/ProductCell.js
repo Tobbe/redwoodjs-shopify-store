@@ -2,6 +2,7 @@ export const QUERY = gql`
   query GET_PRODUCT($handle: String!) {
     product: getProduct(handle: $handle) {
       title
+      description
       images {
         altText
         src
@@ -28,6 +29,7 @@ export const Success = ({ product }) => {
         src={product.images[0].src}
         alt={product.images[0].altText}
       />
+      <p>{product.description}</p>
       <p>
         {product.price.amount} {product.price.currencyCode}
       </p>
