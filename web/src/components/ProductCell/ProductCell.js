@@ -1,3 +1,5 @@
+import AddToCartButton from "src/components/AddToCartButton"
+
 export const QUERY = gql`
   query GET_PRODUCT($handle: String!) {
     product: getProduct(handle: $handle) {
@@ -10,6 +12,10 @@ export const QUERY = gql`
       price {
         amount
         currencyCode
+      }
+      variants {
+        title
+        id
       }
     }
   }
@@ -33,6 +39,7 @@ export const Success = ({ product }) => {
       <p>
         {product.price.amount} {product.price.currencyCode}
       </p>
+      <AddToCartButton product={product} />
     </div>
   )
 }

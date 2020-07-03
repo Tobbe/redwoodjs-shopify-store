@@ -9,37 +9,40 @@ export const schema = gql`
     src: String
   }
 
+  type ProductVariant {
+    title: String!
+    id: String!
+  }
+
   type Product {
     handle: String!
     description: String!
     title: String!
     price: Money!
     images: [Image]!
+    variants: [ProductVariant]!
   }
 
-  type CheckoutItem {
-    variantId: String!
+  type CheckoutLineItem {
     quantity: Int!
+    title: String!
+    unitPrice: Money!
+    variant: ProductVariant!
   }
 
   type Checkout {
-    items: [CheckoutItem]!
+    items: [CheckoutLineItem]
     totalPrice: Money!
-  }
-
-  input CheckoutInput {
-    checkoutId: String!
-    variantId: String!
-    quantity: Int!
   }
 
   type Query {
     getProducts: [Product]!
     getProduct(handle: String!): Product
+    getCheckout(checkoutId: String!): Checkout
   }
 
   type Mutation {
     createCheckout: String
-    addToCheckout(checkoutItem: CheckoutInput): Checkout!
+    addToCheckout(checkoutId: String!, variantId: String!): Checkout!
   }
 `

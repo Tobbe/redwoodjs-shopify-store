@@ -26,17 +26,27 @@ export const getProduct = async ({ handle }) => {
 }
 
 export const createCheckout = async () => {
-  const checkout = await shopifyClient.checkout.create();
+  const checkout = await shopifyClient.checkout.create()
 
-  return checkout.id;
+  return checkout.id
 }
 
-export const addToCheckout = ({ id, item }) => {
+export const getCheckout = async ({ checkoutId }) => {
+  const checkout = await shopifyClient.checkout.fetch(checkoutId)
+
   return {
-    items: [item],
-    totalPrice: {
-      amount: 9.99,
-      currencyCode: 'USD',
-    },
+    items: checkout.lineItems,
+    totalPrice: checkout.totalPriceV2,
+  }
+}
+
+export const addToCheckout = async ({ checkoutId, variantId }) => {
+  const checkout = await shopifyClient.checkout.addLineItems(checkoutId, [
+    { variantId, quantity: 1 },
+  ])
+
+  return {
+    items: checkout.lineItems,
+    totalPrice: checkout.totalPriceV2,
   }
 }
