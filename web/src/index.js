@@ -1,37 +1,18 @@
 import ReactDOM from 'react-dom'
-import { RedwoodProvider, FatalErrorBoundary, useMutation } from '@redwoodjs/web'
+import { RedwoodProvider, FatalErrorBoundary } from '@redwoodjs/web'
 import FatalErrorPage from 'src/pages/FatalErrorPage'
-import { ShopifyContextProvider, ShopifyContext } from 'src/context/ShopifyContext'
 import Routes from 'src/Routes'
+import { ShopifyContextProvider } from 'src/context/ShopifyContext'
+import CheckoutCreator from 'src/components/CheckoutCreator'
 
 import './index.css'
-
-const CREATE_CHECKOUT = gql`
-  mutation {
-    checkoutId: createCheckout
-  }
-`
-
-const App = () => {
-  const shopifyContext = React.useContext(ShopifyContext)
-  const [createCheckout] = useMutation(CREATE_CHECKOUT);
-
-  React.useEffect(() => {
-    createCheckout().then(({ data }) => {
-      shopifyContext.setState({ checkoutId: data.checkoutId })
-    });
-  }, [])
-
-  return (
-    <Routes />
-  )
-}
 
 ReactDOM.render(
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider>
       <ShopifyContextProvider>
-        <App />
+        <CheckoutCreator />
+        <Routes />
       </ShopifyContextProvider>
     </RedwoodProvider>
   </FatalErrorBoundary>,
