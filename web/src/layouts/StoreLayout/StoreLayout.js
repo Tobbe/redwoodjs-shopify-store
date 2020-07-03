@@ -7,9 +7,9 @@ import { ShopifyContext } from 'src/context/ShopifyContext'
 
 const GET_CHECKOUT = gql`
   query($checkoutId: String!) {
-    getCheckout(checkoutId: $checkoutId) {
+    checkout: getCheckout(checkoutId: $checkoutId) {
       items {
-        title
+        quantity
       }
     }
   }
@@ -23,7 +23,7 @@ const StoreLayout = ({ children }) => {
     const checkoutId = shopifyContext.state.checkoutId
 
     if (!checkoutId || shopifyContext.state.cartItemsCount !== '#') {
-      return;
+      return
     }
 
     console.log('checkoutId', checkoutId)
@@ -35,11 +35,12 @@ const StoreLayout = ({ children }) => {
           variables: { checkoutId: shopifyContext.state.checkoutId },
         })
         .then(({ data }) => {
-          const cartItemsCount = data.getCheckout.items.length
+          const cartItemsCount = data.checkout.items.reduce(
+            (sum, item) => sum + item.quantity,
+            0
+          )
           if (cartItemsCount !== shopifyContext.state.cartItemsCount) {
-            shopifyContext.setState({
-              cartItemsCount,
-            })
+            shopifyContext.setState({ cartItemsCount })
           }
         })
     }

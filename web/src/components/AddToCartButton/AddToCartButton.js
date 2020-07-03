@@ -17,7 +17,7 @@ const ADD_TO_CHECKOUT = gql`
   }
 `
 
-const AddToCartButton = ({ product }) => {
+const AddToCartButton = ({ variantId }) => {
   const shopifyContext = React.useContext(ShopifyContext)
   const [addToCart] = useMutation(ADD_TO_CHECKOUT)
 
@@ -25,11 +25,14 @@ const AddToCartButton = ({ product }) => {
     addToCart({
       variables: {
         checkoutId: shopifyContext.state.checkoutId,
-        variantId: product.variants[0].id,
+        variantId,
       },
     }).then(({ data }) => {
-      console.log('setState length', data.checkout.items.length);
-      shopifyContext.setState({ cartItemsCount: data.checkout.items.length })
+      const cartItemsCount = data.checkout.items.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+      )
+      shopifyContext.setState({ cartItemsCount })
     })
   }
 
