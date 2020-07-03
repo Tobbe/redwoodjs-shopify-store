@@ -28,10 +28,12 @@ const AddToCartButton = ({ variantId }) => {
         variantId,
       },
     }).then(({ data }) => {
+      console.log('data', data)
       const cartItemsCount = data.checkout.items.reduce(
         (sum, item) => sum + item.quantity,
         0
       )
+      console.log('cartItemsCount', cartItemsCount)
       shopifyContext.setState({ cartItemsCount })
     })
   }

@@ -1,6 +1,6 @@
 const defaultState = {
   checkoutId: undefined,
-  cartItemsCount: '#',
+  cartItemsCount: 0,
 };
 
 export const ShopifyContext = React.createContext({});
