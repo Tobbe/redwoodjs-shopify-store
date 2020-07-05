@@ -12,6 +12,7 @@ export const schema = gql`
   type ProductVariant {
     title: String!
     id: String!
+    price: Money!
   }
 
   type Product {
@@ -26,13 +27,13 @@ export const schema = gql`
   type CheckoutLineItem {
     quantity: Int!
     title: String!
-    unitPrice: Money!
-    variant: ProductVariant!
+    price: Money!
+    image: Image
   }
 
   type Checkout {
     items: [CheckoutLineItem]
-    totalPrice: Money!
+    totalPrice: Money
   }
 
   type Query {

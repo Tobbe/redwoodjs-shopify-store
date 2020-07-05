@@ -14,7 +14,14 @@ const shopifyClient = shopify.buildClient(
 export const getProducts = async () => {
   const products = (await shopifyClient.product.fetchAll())
     .filter((product) => product.availableForSale)
-    .map((product) => ({ ...product, price: product.variants[0].priceV2 }))
+    .map((product) => ({
+      ...product,
+      price: product.variants[0].priceV2,
+      variants: product.variants.map((variant) => ({
+        ...variant,
+        price: variant.priceV2,
+      })),
+    }))
 
   return products
 }
@@ -34,8 +41,17 @@ export const createCheckout = async () => {
 export const getCheckout = async ({ checkoutId }) => {
   const checkout = await shopifyClient.checkout.fetch(checkoutId)
 
+  if (checkout.lineItems.length === 0) {
+    return null;
+  }
+
   return {
-    items: checkout.lineItems,
+    items: checkout.lineItems.map((item) => ({
+      quantity: item.quantity,
+      title: item.title,
+      price: item.variant.priceV2,
+      image: item.variant.image,
+    })),
     totalPrice: checkout.totalPriceV2,
   }
 }
