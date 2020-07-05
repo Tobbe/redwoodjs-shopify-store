@@ -1,4 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
+import CheckoutButton from '../CheckoutButton/CheckoutButton'
 
 export const QUERY = gql`
   query($checkoutId: String!) {
@@ -90,7 +91,8 @@ export const Success = ({ cart }) => {
         </tbody>
       </table>
       <hr />
-      Sub total: {money(cart.totalPrice)}
+      <p>Sub total: {money(cart.totalPrice)}</p>
+      <CheckoutButton />
     </>
   )
 }
