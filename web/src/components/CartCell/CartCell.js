@@ -1,3 +1,5 @@
+import { Link, routes } from '@redwoodjs/router'
+
 export const QUERY = gql`
   query($checkoutId: String!) {
     cart: getCheckout(checkoutId: $checkoutId) {
@@ -35,7 +37,15 @@ export const beforeQuery = (props) => {
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => (
+  <div>
+    <p>Your cart is currently empty.</p>
+    <p>
+      Go to the <Link to={routes.home()}>home page</Link> to add items to your
+      cart
+    </p>
+  </div>
+)
 
 export const Failure = ({ error, variables }) => {
   if (!variables.checkoutId) {
