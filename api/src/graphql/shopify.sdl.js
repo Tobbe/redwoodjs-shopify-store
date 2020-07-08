@@ -34,6 +34,8 @@ export const schema = gql`
   type Checkout {
     items: [CheckoutLineItem]
     totalPrice: Money
+    id: String
+    webUrl: String
   }
 
   type Query {
@@ -43,7 +45,7 @@ export const schema = gql`
   }
 
   type Mutation {
-    createCheckout: String
+    createCheckout: Checkout!
     addToCheckout(checkoutId: String!, variantId: String!): Checkout!
   }
 `

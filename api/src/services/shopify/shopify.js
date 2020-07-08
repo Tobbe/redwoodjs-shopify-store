@@ -1,12 +1,10 @@
 const fetch = require('node-fetch')
 const shopify = require('shopify-buy')
 
-const DOMAIN = 'tobbe-trial-one.myshopify.com'
-
 const shopifyClient = shopify.buildClient(
   {
     storefrontAccessToken: process.env.SHOPIFY_TOKEN,
-    domain: DOMAIN,
+    domain: process.env.SHOPIFY_DOMAIN,
   },
   fetch
 )
@@ -35,7 +33,10 @@ export const getProduct = async ({ handle }) => {
 export const createCheckout = async () => {
   const checkout = await shopifyClient.checkout.create()
 
-  return checkout.id
+  return {
+    id: checkout.id,
+    webUrl: checkout.webUrl,
+  }
 }
 
 export const getCheckout = async ({ checkoutId }) => {

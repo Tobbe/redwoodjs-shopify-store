@@ -1,5 +1,6 @@
 const defaultState = {
   checkoutId: undefined,
+  checkoutWebUrl: undefined,
   cartItemsCount: 0,
 };
 

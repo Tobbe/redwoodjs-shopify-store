@@ -1,6 +1,10 @@
+import { ShopifyContext } from 'src/context/ShopifyContext'
+
 const CheckoutButton = () => {
+  const shopifyContext = React.useContext(ShopifyContext)
+
   const onClick = () => {
-    console.log('Go to checkout')
+    window.location = shopifyContext.state.checkoutWebUrl
   }
 
   return (
